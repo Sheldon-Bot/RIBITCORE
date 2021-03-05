@@ -62,7 +62,7 @@
             <archive>
               <manifest>
                 <addClasspath>true</addClasspath>
-                <mainClass>dev.kscott.App</mainClass>
+                <mainClass>dev.kscott.sheldonbot.App</mainClass>
               </manifest>
             </archive>
           </configuration>

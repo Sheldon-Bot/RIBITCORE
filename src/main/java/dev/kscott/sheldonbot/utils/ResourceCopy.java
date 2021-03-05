@@ -1,4 +1,4 @@
-package dev.kscott.utils;
+package dev.kscott.sheldonbot.utils;
 
 import java.io.File;
 import java.io.IOException;

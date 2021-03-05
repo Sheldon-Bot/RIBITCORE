@@ -1,6 +1,6 @@
-package dev.kscott.camera;
+package dev.kscott.sheldonbot.camera;
 
-import dev.kscott.Manager;
+import dev.kscott.sheldonbot.Manager;
 
 public class CameraManager extends Manager {
 

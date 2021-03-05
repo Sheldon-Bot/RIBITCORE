@@ -1,6 +1,6 @@
-package dev.kscott;
+package dev.kscott.sheldonbot;
 
-import dev.kscott.script.ScriptThread;
+import dev.kscott.sheldonbot.script.ScriptThread;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import sun.misc.Signal;
 

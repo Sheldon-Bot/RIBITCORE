@@ -1,4 +1,4 @@
-package dev.kscott.script;
+package dev.kscott.sheldonbot.script;
 
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -12,7 +12,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
 
 public class ScriptThread extends Thread {
 

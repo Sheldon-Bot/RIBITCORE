@@ -1,4 +1,4 @@
-package dev.kscott;
+package dev.kscott.sheldonbot;
 
 import java.io.BufferedOutputStream;
 import java.io.File;

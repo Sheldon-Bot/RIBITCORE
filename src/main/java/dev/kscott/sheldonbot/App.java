@@ -15,7 +15,11 @@ public class App {
 
     public static void main( String[] args )
     {
-        new RobotManager().startFront();
+        try {
+            new RobotManager().startFront();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 

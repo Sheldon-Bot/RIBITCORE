@@ -1,3 +1,5 @@
+package dev.kscott.utils;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,6 +13,7 @@ import java.util.jar.JarFile;
 
 /**
  * A helper to copy resources from a JAR file into a directory.
+ * Source: https://stackoverflow.com/a/58318009
  */
 public final class ResourceCopy {
 

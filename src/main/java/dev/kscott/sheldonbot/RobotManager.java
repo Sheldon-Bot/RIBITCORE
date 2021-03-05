@@ -1,5 +1,6 @@
 package dev.kscott.sheldonbot;
 
+import dev.kscott.sheldonbot.script.ScriptManager;
 import dev.kscott.sheldonbot.script.ScriptThread;
 import dev.kscott.sheldonbot.utils.ResourceCopy;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -21,6 +22,8 @@ public class RobotManager {
      */
     private final @NonNull ResourceCopy resourceCopy;
 
+    private final @NonNull ScriptManager scriptManager;
+
 //    private final @NonNull ScriptThread motorThread;
 
     public RobotManager() throws IOException {
@@ -28,15 +31,7 @@ public class RobotManager {
 
         this.initializeResources();
 
-        final @NonNull ScriptThread frontThread = startFront();
-        final @NonNull ScriptThread backThread = startBack();
-//        motorThread = startMotors();
-
-        Signal.handle(new Signal("INT"), signal -> {
-            frontThread.interrupt();
-            backThread.interrupt();
-//            motorThread.interrupt();
-        });
+        this.scriptManager = new ScriptManager();
     }
 
     private void initializeResources() throws IOException {
@@ -49,36 +44,9 @@ public class RobotManager {
         final @NonNull JarFile jarFile = jarOpt.get();
 
         for (final @NonNull String path : resourceDirectoriesToExtract) {
-            this.resourceCopy.copyResourceDirectory(jarFile, path, new File("./temp/scripts"));
+            this.resourceCopy.copyResourceDirectory(jarFile, path, new File("./sheldon/scripts"));
         }
     }
-
-    public ScriptThread startFront() {
-        ScriptThread thread = new ScriptThread("scripts/camera.py", "http://192.168.2.205:5001/api/image/front", "/dev/video0");
-        thread.start();
-        return thread;
-    }
-
-    public ScriptThread startBack() {
-        ScriptThread thread = new ScriptThread("scripts/camera.py", "http://192.168.2.205:5001/api/image/back", "/dev/video2");
-        thread.start();
-        return thread;
-    }
-
-    public ScriptThread startMotors() {
-        ScriptThread thread = new ScriptThread("scripts/motor_client.py");
-        thread.onReady(() -> {
-            System.out.println("motors ready");
-            thread.send("hi!");
-            thread.send("hi!");
-            thread.send("hi!");
-            thread.send("hi!");
-        });
-        thread.start();
-        return thread;
-    }
-
-//    public ScriptThread getMotorThread() {
-//        return motorThread;
+    //        return motorThread;
 //    }
 }

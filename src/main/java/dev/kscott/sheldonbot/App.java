@@ -9,7 +9,7 @@ public class App {
 
     public static void main(String[] args) {
         try {
-            new RobotManager().startFront();
+            new RobotManager();
         } catch (IOException e) {
             e.printStackTrace();
         }

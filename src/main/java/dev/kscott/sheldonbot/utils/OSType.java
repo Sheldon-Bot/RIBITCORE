@@ -46,4 +46,28 @@ public enum OSType {
         return UNKNOWN;
     }
 
+    /**
+     *
+     * @return
+     */
+    public static boolean isWindows() {
+        return getOSType() == OSType.WINDOWS;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public static boolean isUnix() {
+        return getOSType() == OSType.UNIX;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public static boolean isOSX() {
+        return getOSType() == OSType.OSX;
+    }
+
 }

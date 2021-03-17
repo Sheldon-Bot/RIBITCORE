@@ -24,14 +24,16 @@ public class ScriptThread extends Thread {
     private @Nullable Runnable readyCallback;
 
     public ScriptThread(
+            final @NonNull String pythonPath,
             final @NonNull String fileName,
             final @NonNull String... args
     ) {
         this.fileName = fileName;
-        this.command = new ArrayList<>(Arrays.asList(args));
-        this.command.add(0, fileName);
-        this.command.add(0, "-u");
-        this.command.add(0, "python3");
+        this.command = new ArrayList<>();
+
+        this.command.add(pythonPath);
+        this.command.add(fileName);
+        this.command.addAll(Arrays.asList(args));
     }
 
     public void send(final @NonNull String data) {
@@ -84,8 +86,7 @@ public class ScriptThread extends Thread {
         }
     }
 
-    public void onReady(final @NonNull Runnable runnable) {
-        this.readyCallback = runnable;
+    public @Nullable Process getProcess() {
+        return process;
     }
-
 }

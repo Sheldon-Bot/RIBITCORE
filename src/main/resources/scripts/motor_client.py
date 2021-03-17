@@ -1,22 +1,15 @@
-import sys
+#!/usr/bin/env python
 
-print("ready") # This is necessary so the Java watchdog knows that the script has began.
+# WS client example
 
-# import motor
+import asyncio
+import websockets
 
-# GPIO.setmode(GPIO.BCM)
+async def hello():
+    uri = "ws://localhost:8765"
+    async with websockets.connect(uri) as websocket:
+        while True:
+            data = await websocket.recv()
+            await websocket.send(data+" received")
 
-# left_motor = motor.Motor(23)
-# right_motor = motor.Motor(24)
-#
-# while True:
-#     left_motor.set_speed(motor.REVERSE_SLOW)
-#     right_motor.set_speed(motor.REVERSE_SLOW)
-#
-# left_motor.cleanup()
-# right_motor.cleanup()
-#
-
-while True:
-    data = input()
-    print(data)
+asyncio.get_event_loop().run_until_complete(hello())

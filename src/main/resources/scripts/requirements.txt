@@ -1,4 +1,0 @@
-opencv_python
-requests
-RPi.GPIO
-websockets

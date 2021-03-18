@@ -2,6 +2,8 @@
 
 This is the repository for all code running on the Sheldon Bot.
 
+## **NOTE: This branch is deprecated. Please direct all contributions to the [dev branch](https://github.com/Sheldon-Bot/RIBITCORE/tree/dev).**
+
 # Requirements
 
 To run Sheldon Bot, you must have the following prerequisites installed:

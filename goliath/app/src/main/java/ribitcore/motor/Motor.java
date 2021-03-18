@@ -3,7 +3,7 @@ package app.src.main.java.ribitcore.motor;
 public class Motor {
 
     /**
-     * Stores the various speeds the RIBIT motors can run at.
+     * Stores the speeds a {@link Motor} can run at.
      */
     public enum Speed {
 

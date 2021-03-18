@@ -20,6 +20,7 @@ repositories {
 
 dependencies {
     implementation("com.google.guava:guava:29.0-jre")
+    implementation("com.diozero:diozero-core:1.1.6")
 
     compileOnly("org.checkerframework:checker-qual:3.4.0")
     checkerFramework("org.checkerframework:checker:3.4.0")

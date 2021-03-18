@@ -9,6 +9,8 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
+    java
+    id("org.checkerframework") version("0.5.17")
 }
 
 repositories {
@@ -17,14 +19,18 @@ repositories {
 }
 
 dependencies {
-    // Use JUnit test framework.
-    testImplementation("junit:junit:4.13")
-
-    // This dependency is used by the application.
     implementation("com.google.guava:guava:29.0-jre")
+
+    compileOnly("org.checkerframework:checker-qual:3.4.0")
+    checkerFramework("org.checkerframework:checker:3.4.0")
 }
 
 application {
     // Define the main class for the application.
     mainClass.set("ribitcore.App")
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_16
+    targetCompatibility = JavaVersion.VERSION_16
 }

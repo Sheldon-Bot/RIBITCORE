@@ -44,4 +44,9 @@ public class MotorController {
         motor_main_2.setSpeed(MotorSpeed.REVERSE);
     }
 
+    public void stop() {
+        motor_main_1.setSpeed(MotorSpeed.NEUTRAL);
+        motor_main_2.setSpeed(MotorSpeed.NEUTRAL);
+    }
+
 }

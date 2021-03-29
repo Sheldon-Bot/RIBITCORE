@@ -1,9 +1,9 @@
 package ribitcore.motor;
 
 public enum MotorSpeed {
-    REVERSE(1400),
-    NEUTRAL(1500),
-    FORWARDS(1600);
+    REVERSE(1.1F),
+    NEUTRAL(1.49F),
+    FORWARDS(1.8F);
 
     private final float freq;
 

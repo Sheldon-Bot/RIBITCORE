@@ -30,12 +30,18 @@ public class MotorController {
     }
 
     public void backwards() {
+        motor_main_1.setSpeed(MotorSpeed.REVERSE);
+        motor_main_2.setSpeed(MotorSpeed.REVERSE);
     }
 
     public void left() {
+        motor_main_1.setSpeed(MotorSpeed.REVERSE);
+        motor_main_2.setSpeed(MotorSpeed.FORWARDS);
     }
 
     public void right() {
+        motor_main_1.setSpeed(MotorSpeed.FORWARDS);
+        motor_main_2.setSpeed(MotorSpeed.REVERSE);
     }
 
 }

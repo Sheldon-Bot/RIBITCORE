@@ -25,7 +25,8 @@ public class MotorController {
     }
 
     public void forwards() {
-        motor_main_1.setValue(1F);
+        motor_main_1.setSpeed(MotorSpeed.FORWARDS);
+        motor_main_2.setSpeed(MotorSpeed.FORWARDS);
     }
 
     public void backwards() {

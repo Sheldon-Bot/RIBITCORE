@@ -1,6 +1,5 @@
 package ribitcore.motor;
 
-import com.diozero.api.PwmOutputDevice;
 import com.diozero.api.Servo;
 import com.diozero.util.SleepUtil;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -17,8 +16,10 @@ public class Motor {
     private static final int FREQ = 50;
 
 
-    private final @NonNull PwmOutputDevice servo;
+    private final @NonNull Servo servo;
     private final int pin;
+
+    private final Servo.Trim trim = Servo.Trim.DEFAULT;
 
     /**
      * Constructs {@link Motor}.
@@ -33,18 +34,32 @@ public class Motor {
         this.pin = pin;
 
         final int frequency = 50;
-        servo = new PwmOutputDevice(pin, 50, 0.5F);
+        servo = new Servo(pin, trim.getMidPulseWidthMs(), frequency, trim);
         System.out.println("------------- Servo "+pin+" -------------");
+        System.out.println("pulseWidthMs :"+servo.getPulseWidthMs());
+        System.out.println("angle :"+servo.getAngle());
         System.out.println("value :"+servo.getValue());
-        System.out.println("pwmFrequency :"+servo.getPwmFrequency());
     }
 
-    public void setValue(final float angle) {
-        this.servo.setValue(angle);
+    public void on() {
+        this.servo.setPulseWidthMs(2F);
+        this.servo.setValue(1);
     }
 
-    public float getValue() {
-        return this.servo.getValue();
+    public void off() {
+    }
+
+    public void setSpeed(final @NonNull MotorSpeed speed) {
+        this.servo.setPulseWidthMs(speed.getFrequency());
+        this.servo.setValue(1);
+    }
+
+    public void setSpeed(final float angle) {
+        this.servo.setAngle(angle);
+    }
+
+    public float getAngle() {
+        return this.servo.getAngle();
     }
 
 }

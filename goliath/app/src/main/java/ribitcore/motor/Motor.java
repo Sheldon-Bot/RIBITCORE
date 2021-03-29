@@ -1,6 +1,15 @@
-package app.src.main.java.ribitcore.motor;
+package ribitcore.motor;
 
+/**
+ * Represents a physical RIBIT motor.
+ */
 public class Motor {
+
+    private final int pin;
+
+    public Motor(final int pin) {
+        this.pin = pin;
+    }
 
     /**
      * Stores the speeds a {@link Motor} can run at.

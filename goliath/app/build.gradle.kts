@@ -5,13 +5,16 @@
  * For more details take a look at the 'Building Java & JVM projects' chapter in the Gradle
  * User Manual available at https://docs.gradle.org/6.8.3/userguide/building_java_projects.html
  */
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
-    java
+    id("com.github.johnrengelman.shadow") version("6.1.0")
     id("org.checkerframework") version("0.5.17")
+    java
 }
+
 
 repositories {
     // Use JCenter for resolving dependencies.
@@ -20,15 +23,14 @@ repositories {
 
 dependencies {
     implementation("com.google.guava:guava:29.0-jre")
-    implementation("com.diozero:diozero-core:1.1.6")
-
-    compileOnly("org.checkerframework:checker-qual:3.4.0")
-    checkerFramework("org.checkerframework:checker:3.4.0")
+    implementation("com.diozero:diozero-core:1.1.7")
+    implementation("com.diozero:diozero-provider-pigpio:1.1.7")
 }
 
 application {
     // Define the main class for the application.
     mainClass.set("ribitcore.App")
+    mainClassName = "ribitcore.App"
 }
 
 java {
@@ -39,5 +41,22 @@ java {
 tasks.withType<Jar> {
     manifest {
         attributes["Main-Class"] = "ribitcore.App"
+    }
+}
+
+tasks {
+    named<ShadowJar>("shadowJar") {
+        archiveBaseName.set("shadow")
+        mergeServiceFiles()
+        manifest {
+
+            attributes(mapOf("Main-Class" to "ribitcore.App"))
+        }
+    }
+}
+
+tasks {
+    build {
+        dependsOn(shadowJar)
     }
 }

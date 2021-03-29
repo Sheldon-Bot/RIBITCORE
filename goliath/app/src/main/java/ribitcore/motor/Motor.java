@@ -1,11 +1,7 @@
 package ribitcore.motor;
 
 import com.diozero.api.Servo;
-import com.diozero.util.SleepUtil;
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.tinylog.Logger;
-import uk.pigpioj.PigpioConstants;
-import uk.pigpioj.PigpioInterface;
 
 /**
  * Controls a physical server motor.
@@ -26,7 +22,7 @@ public class Motor {
      * <p>
      * Initializes {@code pigpio} on {@code pin}.
      *
-     * @param pin    Pin number of the motor.
+     * @param pin Pin number of the motor.
      */
     public Motor(
             final int pin
@@ -35,23 +31,10 @@ public class Motor {
 
         final int frequency = 50;
         servo = new Servo(pin, trim.getMidPulseWidthMs(), frequency, trim);
-        System.out.println("------------- Servo "+pin+" -------------");
-        System.out.println("pulseWidthMs :"+servo.getPulseWidthMs());
-        System.out.println("angle :"+servo.getAngle());
-        System.out.println("value :"+servo.getValue());
-    }
-
-    public void on() {
-        this.servo.setPulseWidthMs(2F);
-        this.servo.setValue(1);
-    }
-
-    public void off() {
     }
 
     public void setSpeed(final @NonNull MotorSpeed speed) {
         this.servo.setPulseWidthMs(speed.getFrequency());
-        this.servo.setValue(1);
     }
 
     public void setSpeed(final float angle) {

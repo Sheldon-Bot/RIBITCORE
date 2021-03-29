@@ -1,5 +1,6 @@
 package ribitcore;
 
+import com.diozero.util.SleepUtil;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import ribitcore.motor.MotorController;
 import uk.pigpioj.PigpioConstants;
@@ -33,7 +34,21 @@ public class RibitBootstrapper {
             final @NonNull MotorController motorController = new MotorController(pigpio);
 
             while (true) {
+                System.out.println("MC FORWARDS");
                 motorController.forwards();
+                SleepUtil.sleepSeconds(1);
+
+                System.out.println("MC BACKWARDS");
+                motorController.backwards();
+                SleepUtil.sleepSeconds(1);
+
+                System.out.println("MC LEFT");
+                motorController.left();
+                SleepUtil.sleepSeconds(1);
+
+                System.out.println("MC RIGHT");
+                motorController.right();
+                SleepUtil.sleepSeconds(1);
             }
         }).start();
     }

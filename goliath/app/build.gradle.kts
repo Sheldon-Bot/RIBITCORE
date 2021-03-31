@@ -19,12 +19,15 @@ plugins {
 repositories {
     // Use JCenter for resolving dependencies.
     jcenter()
+    mavenCentral()
 }
 
 dependencies {
     implementation("com.google.guava:guava:29.0-jre")
     implementation("com.diozero:diozero-core:1.1.7")
     implementation("com.diozero:diozero-provider-pigpio:1.1.7")
+    implementation("org.java-websocket:Java-WebSocket:1.5.1")
+    implementation("com.google.code.gson:gson:2.8.6")
 }
 
 application {

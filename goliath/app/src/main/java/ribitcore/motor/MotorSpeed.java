@@ -15,4 +15,18 @@ public enum MotorSpeed {
         return this.freq;
     }
 
+    public static float freqToValue(float freq) {
+        return (freq - REVERSE.freq)
+                * (2 - 1)
+                / (FORWARDS.freq - REVERSE.freq)
+                + 1;
+    }
+
+    public static float valueToFreq(float value) {
+        return (value - 1)
+                * (FORWARDS.freq - REVERSE.freq)
+                / (2 - 1)
+                + REVERSE.freq;
+    }
+
 }

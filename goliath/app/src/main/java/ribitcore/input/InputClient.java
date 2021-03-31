@@ -31,7 +31,7 @@ public class InputClient extends WebSocketClient {
 
         System.out.println(data);
 
-        if (data.get("type").getAsString().equals("drive")) {
+        if (data.get("command").getAsString().equals("drive")) {
             final float roll = data.get("roll").getAsFloat();
             final float pitch = data.get("pitch").getAsFloat();
 

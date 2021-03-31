@@ -1,13 +1,10 @@
 package ribitcore;
 
-import com.diozero.util.SleepUtil;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import ribitcore.input.InputClient;
 import ribitcore.motor.MotorController;
-import uk.pigpioj.PigpioConstants;
 import uk.pigpioj.PigpioInterface;
 import uk.pigpioj.PigpioJ;
-
-import java.io.IOException;
 
 public class RibitBootstrapper {
 
@@ -30,25 +27,37 @@ public class RibitBootstrapper {
             System.out.println("version: " + pigpioVersion);
         }
 
+        final @NonNull MotorController motorController = new MotorController(pigpio);
+
+//        new Thread(() -> {
+//            while (true) {
+//                System.out.println("MC FORWARDS");
+//                motorController.forwards();
+//                SleepUtil.sleepSeconds(1);
+//
+//                System.out.println("MC BACKWARDS");
+//                motorController.backwards();
+//                SleepUtil.sleepSeconds(1);
+//
+//                System.out.println("MC LEFT");
+//                motorController.left();
+//                SleepUtil.sleepSeconds(1);
+//
+//                System.out.println("MC RIGHT");
+//                motorController.right();
+//                SleepUtil.sleepSeconds(1);
+//
+//                System.out.println("MC STOP");
+//                motorController.stop();
+//                SleepUtil.sleepSeconds(1);
+//            }
+//        }).start();
+
         new Thread(() -> {
-            final @NonNull MotorController motorController = new MotorController(pigpio);
-
-            while (true) {
-                System.out.println("MC FORWARDS");
-                motorController.forwards();
-                SleepUtil.sleepSeconds(1);
-
-                System.out.println("MC BACKWARDS");
-                motorController.backwards();
-                SleepUtil.sleepSeconds(1);
-
-                System.out.println("MC LEFT");
-                motorController.left();
-                SleepUtil.sleepSeconds(1);
-
-                System.out.println("MC RIGHT");
-                motorController.right();
-                SleepUtil.sleepSeconds(1);
+            try {
+                new InputClient(motorController).connectBlocking();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }).start();
     }

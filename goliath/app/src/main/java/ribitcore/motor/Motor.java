@@ -17,10 +17,10 @@ public class Motor {
 
     private final Servo.Trim trim = Servo.Trim.DEFAULT;
 
+    private float lastValue;
+
     /**
      * Constructs {@link Motor}.
-     * <p>
-     * Initializes {@code pigpio} on {@code pin}.
      *
      * @param pin Pin number of the motor.
      */
@@ -34,15 +34,20 @@ public class Motor {
     }
 
     public void setSpeed(final @NonNull MotorSpeed speed) {
-        this.servo.setPulseWidthMs(speed.getFrequency());
+        setValue(MotorSpeed.freqToValue(speed.getFrequency()));
     }
 
-    public void setSpeed(final float angle) {
-        this.servo.setAngle(angle);
+    /**
+     * Between -1.0 and +1.0.
+     * @param value int in rangeq
+     */
+    public void setValue(final float value) {
+        this.servo.setPulseWidthMs(MotorSpeed.valueToFreq(value));
+        lastValue = value;
     }
 
-    public float getAngle() {
-        return this.servo.getAngle();
+    public float getValue() {
+        return this.lastValue;
     }
 
 }

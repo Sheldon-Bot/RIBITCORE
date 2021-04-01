@@ -3,10 +3,6 @@
  */
 package ribitcore;
 
-import com.diozero.api.Servo;
-import com.diozero.util.SleepUtil;
-import org.tinylog.Logger;
-
 public class App {
 
     public static void main(String[] args) {

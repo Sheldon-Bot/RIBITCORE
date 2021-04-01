@@ -6,6 +6,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 import ribitcore.motor.MotorController;
+import ribitcore.motor.MotorSpeed;
 
 import java.net.URI;
 
@@ -35,7 +36,19 @@ public class InputClient extends WebSocketClient {
             final float roll = data.get("roll").getAsFloat();
             final float pitch = data.get("pitch").getAsFloat();
 
-            motorController.setValues(pitch, roll);
+            final boolean isJoystick = data.get("type").getAsString().equals("joystick");
+
+            float leftMotorOutput;
+            float rightMotorOutput;
+
+
+            if (isJoystick) {
+                motorController.setValues(
+                        MotorSpeed.thousandsValueToOneValue(roll),
+                        MotorSpeed.thousandsValueToOneValue(pitch)
+                );
+            }
+
         }
     }
 

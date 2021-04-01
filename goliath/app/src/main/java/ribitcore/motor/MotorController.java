@@ -52,7 +52,7 @@ public class MotorController {
     public void setValues(double motor1, double motor2) {
         motor_main_1.setValue(motor1);
         motor_main_2.setValue(motor2);
-        System.out.println("1: "+motor1+", 2: "+motor2);
+        System.out.println("1: " + motor1 + ", 2: " + motor2);
 //
 //        float motor1Value = cleanseInputNumber(x);
 //        float motor2Value = cleanseInputNumber(x);

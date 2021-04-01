@@ -21,7 +21,7 @@ public class RibitBootstrapper {
     public void start() {
         // version check
         if (pigpioVersion < 0) {
-            System.out.println("Invalid version: "+pigpioVersion+", exiting...");
+            System.out.println("Invalid version: " + pigpioVersion + ", exiting...");
             return;
         } else {
             System.out.println("version: " + pigpioVersion);

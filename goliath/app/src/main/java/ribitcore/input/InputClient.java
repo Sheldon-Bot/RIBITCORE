@@ -54,7 +54,7 @@ public class InputClient extends WebSocketClient {
 
     @Override
     public void onClose(int code, String reason, boolean remote) {
-        System.out.println("[close] "+code+" - "+reason+" - "+remote);
+        System.out.println("[close] " + code + " - " + reason + " - " + remote);
     }
 
     @Override

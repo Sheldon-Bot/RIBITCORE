@@ -36,6 +36,7 @@ public class Motor {
 
     /**
      * Between -1.0 and +1.0.
+     *
      * @param value int in range
      */
     public void setValue(final double value) {

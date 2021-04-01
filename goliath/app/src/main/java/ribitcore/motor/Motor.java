@@ -8,16 +8,13 @@ import org.checkerframework.checker.nullness.qual.NonNull;
  */
 public class Motor {
 
-    private static final int PWM_MAX = 255;
-    private static final int FREQ = 50;
-
-
     private final @NonNull Servo servo;
+
     private final int pin;
 
     private final Servo.Trim trim = Servo.Trim.DEFAULT;
 
-    private float lastValue;
+    private double lastValue;
 
     /**
      * Constructs {@link Motor}.
@@ -39,14 +36,14 @@ public class Motor {
 
     /**
      * Between -1.0 and +1.0.
-     * @param value int in rangeq
+     * @param value int in range
      */
-    public void setValue(final float value) {
-        this.servo.setPulseWidthMs(MotorSpeed.valueToFreq(value));
+    public void setValue(final double value) {
+        this.servo.setPulseWidthMs((float) MotorSpeed.valueToFreq(value));
         lastValue = value;
     }
 
-    public float getValue() {
+    public double getValue() {
         return this.lastValue;
     }
 

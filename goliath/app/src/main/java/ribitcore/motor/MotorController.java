@@ -1,11 +1,7 @@
 package ribitcore.motor;
 
-import com.diozero.util.SleepUtil;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import uk.pigpioj.PigpioInterface;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Controls the RIBIT motor array.
@@ -47,6 +43,39 @@ public class MotorController {
     public void stop() {
         motor_main_1.setSpeed(MotorSpeed.NEUTRAL);
         motor_main_2.setSpeed(MotorSpeed.NEUTRAL);
+    }
+
+    /**
+     * @param motor1 motor1 %
+     * @param motor2 motor2 %
+     */
+    public void setValues(double motor1, double motor2) {
+        motor_main_1.setValue(motor1);
+        motor_main_2.setValue(motor2);
+        System.out.println("1: "+motor1+", 2: "+motor2);
+//
+//        float motor1Value = cleanseInputNumber(x);
+//        float motor2Value = cleanseInputNumber(x);
+//
+//        final float turnFactor = 0.9F;
+//
+//        if (y < 0) {
+//            motor2Value =+ y*turnFactor;
+//        } else if (y > 0) {
+//            motor1Value =+ y*turnFactor;
+//        }
+//
+//        motor_main_1.setValue(motor1Value);
+//        motor_main_2.setValue(motor2Value);
+//        System.out.println("[motor_val] "+motor1Value + " - " +motor2Value);
+    }
+
+    private float cleanseInputNumber(final float value) {
+        if ((-0.2 < value && value < 0.2)) {
+            return 0;
+        }
+
+        return value;
     }
 
 }

@@ -1,5 +1,7 @@
 package ribitcore.display;
 
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.ds.v4l4j.V4l4jDriver;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import processing.core.PApplet;
@@ -82,6 +84,7 @@ public class DisplayApplet extends PApplet {
         // Display methods
         background(COLOR_BG.getRGB());
         drawBottomBar();
+        drawMainViews();
         drawDebugPanel();
     }
 
@@ -107,6 +110,59 @@ public class DisplayApplet extends PApplet {
         this.debugPanel.addPanelEntry(new PanelEntry("key: "+key));
         this.debugPanel.addPanelEntry(new PanelEntry("sketch path: "+sketchPath()));
         this.debugPanel.run();
+    }
+
+    /**
+     * Draws the main views.
+     */
+    private void drawMainViews() {
+        drawNetCamView();
+        drawFrontCamView();
+        drawBackCamView();
+    }
+
+    /**
+     * Draws the internet-connected webcam view.
+     */
+    private void drawNetCamView() {
+        int x = 20;
+        int y = 100;
+        int w = 700;
+        int h = 700;
+        fill(50, 50, 50);
+        rect(x, y, w, h, 10);
+        textAlign(LEFT);
+        drawText("Status: not connected!", w, h, 15);
+    }
+
+    /**
+     * Draws the front camera view.
+     */
+    private void drawFrontCamView() {
+        int x = 800;
+        int y = 100;
+        int w = 400;
+        int h = 400;
+
+        fill(50, 50, 50);
+        rect(x, y, w, h, 10);
+        textAlign(LEFT);
+        drawText("Status: not connected!", w, h, 15);
+    }
+
+    /**
+     * Draws the back camera view.
+     */
+    private void drawBackCamView() {
+        int x = 800;
+        int y = 520;
+        int w = 400;
+        int h = 400;
+
+        fill(50, 50, 50);
+        rect(x, y, w, h, 10);
+        textAlign(LEFT);
+        drawText("Status: not connected!", w, h, 15);
     }
 
     /**

@@ -33,7 +33,9 @@ dependencies {
     implementation("org.java-websocket:Java-WebSocket:1.5.1")
     implementation("com.google.code.gson:gson:2.8.6")
     implementation(fileTree("../lib"))
-    implementation("com.github.sarxos:webcam-capture-driver-v4l4j:0.3.12")
+//    implementation("org.slf4j:slf4j-api:jar:1.7.2")
+//    implementation("uk.co.caprica:vlcj:jar:2.4.1")
+//    implementation("net.java.dev.jna:jna:jar:4.1.0")
 }
 
 application {

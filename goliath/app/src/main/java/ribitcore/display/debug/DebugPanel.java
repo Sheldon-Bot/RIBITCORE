@@ -105,10 +105,10 @@ public class DebugPanel {
             sketch.textAlign(PConstants.CENTER);
             sketch.text("RIBIT DEBUG", 220, 30);
 
-            sketch.textAlign(PConstants.LEFT);
             for (int i = 0; i < panelEntryList.size(); i++) {
                 final @NonNull PanelEntry entry = panelEntryList.get(i);
-                sketch.text(entry.getText(), 220, ENTRY_TEXT_DRAW_START_HEIGHT + (i*18));
+                sketch.textAlign(PConstants.LEFT);
+                sketch.text(entry.getText(), 20, ENTRY_TEXT_DRAW_START_HEIGHT + (i*18));
             }
         }
 

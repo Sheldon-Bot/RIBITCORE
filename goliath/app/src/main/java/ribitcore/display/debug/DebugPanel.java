@@ -95,6 +95,7 @@ public class DebugPanel {
 
         this.addPanelEntry(new PanelEntry("StartTime: "+dataStore.getTime().toString()));
         this.addPanelEntry(new PanelEntry("CurTime: "+ LocalDateTime.now().toString()));
+        this.addPanelEntry(new PanelEntry("frameCount: "+ sketch.frameCount));
 
         if (this.shouldShow) {
             sketch.textFont(panelFont);

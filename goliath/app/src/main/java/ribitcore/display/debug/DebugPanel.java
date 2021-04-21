@@ -90,12 +90,13 @@ public class DebugPanel {
 
         if (this.shouldShow) {
             sketch.fill(Color.BLACK.getRGB());
-            sketch.rect(PANEL_X, PANEL_Y, PANEL_W, PANEL_H);
+            sketch.rect(PANEL_X, PANEL_Y, PANEL_W, getHeight());
             sketch.fill(255, 255, 255);
             sketch.textSize(15);
             sketch.textAlign(PConstants.CENTER);
             sketch.text("RIBIT DEBUG", 220, 30);
 
+            sketch.textAlign(PConstants.LEFT);
             for (int i = 0; i < panelEntryList.size(); i++) {
                 final @NonNull PanelEntry entry = panelEntryList.get(i);
                 sketch.text(entry.getText(), 220, ENTRY_TEXT_DRAW_START_HEIGHT + (i*18));
@@ -112,6 +113,25 @@ public class DebugPanel {
      */
     public void addPanelEntry(final @NonNull PanelEntry entry) {
         this.panelEntryList.add(entry);
+    }
+
+    /**
+     * Returns the calculated height of the panel.
+     *
+     * @return height, in px.
+     */
+    private int getHeight() {
+        int height = PANEL_H;
+
+        int entryCount = this.panelEntryList.size();
+
+        int entryCalculatedSize = entryCount * 18;
+
+        if (entryCalculatedSize > height) {
+            height = entryCalculatedSize;
+        }
+
+        return height;
     }
 
 }

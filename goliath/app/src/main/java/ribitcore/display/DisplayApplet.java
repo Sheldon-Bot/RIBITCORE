@@ -13,7 +13,7 @@ public class DisplayApplet extends PApplet {
     /**
      * The color of the background.
      */
-    private static final @NonNull Color COLOR_BG = new Color(10, 48, 59);
+    private static final @NonNull Color COLOR_BG = new Color(13, 71, 105);
 
     /**
      * The color of the main text.
@@ -36,7 +36,7 @@ public class DisplayApplet extends PApplet {
         handleQuit();
 
         // Display methods
-        background(COLOR_BG.getRed(), COLOR_BG.getBlue(), COLOR_BG.getGreen());
+        background(COLOR_BG.getRGB());
         drawBottomBar();
     }
 
@@ -49,7 +49,7 @@ public class DisplayApplet extends PApplet {
      */
     private void drawText(final @NonNull String text, final int x, final int y, final int textSize) {
         textSize(textSize);
-        fill(COLOR_TEXT_MAIN.getRed(), COLOR_TEXT_MAIN.getBlue(), COLOR_TEXT_MAIN.getGreen());
+        fill(COLOR_TEXT_MAIN.getRGB());
         text(text, x, y);
     }
 
@@ -58,8 +58,8 @@ public class DisplayApplet extends PApplet {
      */
     private void drawBottomBar() {
         textAlign(CENTER);
-        drawText("RIBIT", 640, 900, 20);
-        drawText("Robotic Interactive Broadcast & IoT Telecommunicator", 640, 980, 100);
+        drawText("RIBIT", 640, 950, 30);
+        drawText("Robotic Interactive Broadcast & IoT Telecommunicator", 640, 980, 25);
     }
 
     /**

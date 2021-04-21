@@ -32,6 +32,10 @@ public class DisplayApplet extends PApplet {
      * Renders the frame of the DisplayApplet.
      */
     public void draw() {
+        // Input checks
+        handleQuit();
+
+        // Display methods
         background(COLOR_BG.getRed(), COLOR_BG.getBlue(), COLOR_BG.getGreen());
         drawBottomBar();
     }
@@ -56,5 +60,16 @@ public class DisplayApplet extends PApplet {
         textAlign(CENTER);
         drawText("RIBIT", 640, 900, 20);
         drawText("Robotic Interactive Broadcast & IoT Telecommunicator", 640, 980, 100);
+    }
+
+    /**
+     * Handles quit input.
+     */
+    private void handleQuit() {
+        if (keyPressed) {
+            if (keyCode == 81) {
+                System.exit(0);
+            }
+        }
     }
 }

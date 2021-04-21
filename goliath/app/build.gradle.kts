@@ -20,6 +20,10 @@ repositories {
     // Use JCenter for resolving dependencies.
     jcenter()
     mavenCentral()
+
+    flatDir {
+        dirs = setOf(file("../lib"))
+    }
 }
 
 dependencies {
@@ -28,6 +32,8 @@ dependencies {
     implementation("com.diozero:diozero-provider-pigpio:1.1.7")
     implementation("org.java-websocket:Java-WebSocket:1.5.1")
     implementation("com.google.code.gson:gson:2.8.6")
+    implementation(fileTree("../lib"))
+    implementation("com.github.sarxos:webcam-capture-driver-v4l4j:0.3.12")
 }
 
 application {

@@ -1,4 +1,4 @@
-sftp -v pi@192.168.2.63 <<EOF
+sftp -v pi@10.0.0.207 <<EOF
 lcd /c/Users/kscott-laptop-window/robotcode2/goliath/app/build/libs/
 cd /home/pi/bot/
 put shadow-all.jar

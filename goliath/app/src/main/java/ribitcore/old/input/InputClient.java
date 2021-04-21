@@ -1,16 +1,18 @@
-package ribitcore.input;
+package ribitcore.old.input;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
-import ribitcore.motor.MotorController;
-import ribitcore.motor.MotorSpeed;
+import ribitcore.old.motor.MotorController;
+import ribitcore.old.motor.MotorSpeed;
 
 import java.net.URI;
 
 public class InputClient extends WebSocketClient {
+
+    private static final double MAX_SPEED = 1.0;
 
     private final @NonNull MotorController motorController;
 
@@ -38,18 +40,49 @@ public class InputClient extends WebSocketClient {
 
             final boolean isJoystick = data.get("type").getAsString().equals("joystick");
 
-            float leftMotorOutput;
-            float rightMotorOutput;
-
+            double leftMotorOutput = 0;
+            double rightMotorOutput = 0;
 
             if (isJoystick) {
-                motorController.setValues(
-                        MotorSpeed.thousandsValueToOneValue(roll),
-                        MotorSpeed.thousandsValueToOneValue(pitch)
-                );
+                final double y = cleanseValue(MotorSpeed.thousandsValueToOneValue(pitch));
+                final double x = cleanseValue(MotorSpeed.thousandsValueToOneValue(roll));
+
+                System.out.println("[xy] "+x+", "+y);
+
+                double maxInput = Math.copySign(Math.max(Math.abs(y), Math.abs(x)), y);
+
+                if (y >= 0) {
+                    if (x >= 0) {
+                        leftMotorOutput = maxInput;
+                        rightMotorOutput = y - x;
+                    } else {
+                        leftMotorOutput = y + x;
+                        rightMotorOutput = maxInput;
+                    }
+                } else {
+                    if (x >= 0) {
+                        leftMotorOutput = y + x;
+                        rightMotorOutput = maxInput;
+                    } else {
+                        leftMotorOutput = maxInput;
+                        rightMotorOutput = y - x;
+                    }
+                }
             }
 
+            motorController.setValues(
+                    leftMotorOutput,
+                    rightMotorOutput * -1
+            );
         }
+    }
+
+    private double cleanseValue(double value) {
+        if (value <= -0.1 && value <= 0.1) {
+            return 0;
+        }
+
+        return value;
     }
 
     @Override

@@ -2,50 +2,61 @@ package ribitcore.motor;
 
 import com.diozero.api.Servo;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import ribitcore.old.motor.MotorSpeed;
 
 /**
- * Controls a physical server motor.
+ * Represents a physical {@link Servo} motor.
  */
 public class Motor {
 
+    /**
+     * The frequency of the motor.
+     */
+    private static final int FREQUENCY = 50;
+
+    /**
+     * The {@link Servo} instance.
+     */
     private final @NonNull Servo servo;
 
-    private final int pin;
+    /**
+     * The {@link Servo.Trim} for the motor.
+     */
+    private final Servo.Trim trim;
 
-    private final Servo.Trim trim = Servo.Trim.DEFAULT;
-
-    private double lastValue;
+    /**
+     * Stores the value of the motor.
+     */
+    private @NonNull MotorSpeed motorSpeed;
 
     /**
      * Constructs {@link Motor}.
      *
-     * @param pin Pin number of the motor.
+     * @param pin the pin of the motor.
      */
-    public Motor(
-            final int pin
-    ) {
-        this.pin = pin;
-
-        final int frequency = 50;
-        servo = new Servo(pin, trim.getMidPulseWidthMs(), frequency, trim);
-    }
-
-    public void setSpeed(final @NonNull MotorSpeed speed) {
-        setValue(MotorSpeed.freqToValue(speed.getFrequency()));
+    public Motor(final int pin) {
+        this.trim = Servo.Trim.DEFAULT;
+        this.servo = new Servo(pin, trim.getMidPulseWidthMs(), FREQUENCY, trim);
+        this.motorSpeed = MotorSpeed.NEUTRAL;
+        this.setSpeed(motorSpeed);
     }
 
     /**
-     * Between -1.0 and +1.0.
+     * Returns the speed of the motor.
      *
-     * @param value int in range
+     * @return speed of the motor.
      */
-    public void setValue(final double value) {
-        this.servo.setPulseWidthMs((float) MotorSpeed.valueToFreq(value));
-        lastValue = value;
+    public @NonNull MotorSpeed getSpeed() {
+        return this.motorSpeed;
     }
 
-    public double getValue() {
-        return this.lastValue;
+    /**
+     * Sets the speed of the motor.
+     *
+     * @param speed speed of the motor.
+     */
+    public void setSpeed(final @NonNull MotorSpeed speed) {
+        this.servo.setPulseWidthMs(speed.getFrequency());
     }
 
 }

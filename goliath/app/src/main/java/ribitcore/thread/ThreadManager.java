@@ -19,7 +19,10 @@ public abstract class ThreadManager {
         this.thread = new Thread(this::runThread);
     }
 
-    public abstract void runThread();
+    /**
+     * Runs the thread.
+     */
+    protected abstract void runThread();
 
     /**
      * Runs the thread.

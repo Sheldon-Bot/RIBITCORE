@@ -116,12 +116,6 @@ public class DisplayApplet extends PApplet {
         textAlign(CENTER);
         drawText("RIBIT", 640, 950, 30);
         drawText("Robotic Interactive Broadcast & IoT Telecommunicator", 640, 980, 25);
-
-        // draw date
-        textAlign(LEFT);
-        drawText("Start date: " + this.dataStore.getTime().toString(), 10, 1010, 10);
-        drawText("Frame: " + frameCount, 10, 1000, 10);
-        drawText("Keycode: " + keyCode, 10, 990, 10);
     }
 
     /**

@@ -3,6 +3,7 @@ package ribitcore.display;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import processing.core.PApplet;
 import ribitcore.data.DataStore;
+import ribitcore.display.debug.DebugPanel;
 
 import java.awt.*;
 
@@ -27,12 +28,18 @@ public class DisplayApplet extends PApplet {
     private final @NonNull DataStore dataStore;
 
     /**
+     * The {@link DebugPanel} instance.
+     */
+    private final @NonNull DebugPanel debugPanel;
+
+    /**
      * Constructs {@link DisplayApplet}.
      *
      * @param dataStore data store.
      */
     public DisplayApplet(final @NonNull DataStore dataStore) {
         this.dataStore = dataStore;
+        this.debugPanel = new DebugPanel(this, dataStore);
     }
 
     /**
@@ -53,14 +60,15 @@ public class DisplayApplet extends PApplet {
         // Display methods
         background(COLOR_BG.getRGB());
         drawBottomBar();
+        this.debugPanel.run();
     }
 
     /**
      * Draws a text to the screen.
      *
      * @param text text to display.
-     * @param x x-coordinate of the text.
-     * @param y y-coordinate of the text.
+     * @param x    x-coordinate of the text.
+     * @param y    y-coordinate of the text.
      */
     private void drawText(final @NonNull String text, final int x, final int y, final int textSize) {
         textSize(textSize);
@@ -77,17 +85,18 @@ public class DisplayApplet extends PApplet {
         drawText("Robotic Interactive Broadcast & IoT Telecommunicator", 640, 980, 25);
 
         // draw date
-        drawText("Start date: "+this.dataStore.getTime().toString(), 100, 1000, 10);
+        textAlign(LEFT);
+        drawText("Start date: " + this.dataStore.getTime().toString(), 10, 1010, 10);
+        drawText("Frame: " + frameCount, 10, 1000, 10);
+        drawText("Keycode: " + keyCode, 10, 990, 10);
     }
 
     /**
      * Handles quit input.
      */
     private void handleQuit() {
-        if (keyPressed) {
-            if (keyCode == 81) {
-                System.exit(0);
-            }
+        if (keyCode == 81) {
+            System.exit(0);
         }
     }
 }

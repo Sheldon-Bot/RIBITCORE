@@ -87,9 +87,9 @@ public class DebugPanel {
      * Runs the {@link DebugPanel}.
      */
     public void run() {
-        if (sketch.keyCode == 61) {
+        if (sketch.key == '=') {
             this.shouldShow = true;
-        } else if (sketch.keyCode == 45) {
+        } else if (sketch.key == '-') {
             this.shouldShow = false;
         }
 

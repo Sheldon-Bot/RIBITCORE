@@ -2,6 +2,7 @@ package ribitcore.display;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import processing.core.PApplet;
+import ribitcore.data.DataStore;
 
 import java.awt.*;
 
@@ -19,6 +20,20 @@ public class DisplayApplet extends PApplet {
      * The color of the main text.
      */
     private static final @NonNull Color COLOR_TEXT_MAIN = new Color(144, 214, 160);
+
+    /**
+     * The {@link DataStore} instance.
+     */
+    private final @NonNull DataStore dataStore;
+
+    /**
+     * Constructs {@link DisplayApplet}.
+     *
+     * @param dataStore data store.
+     */
+    public DisplayApplet(final @NonNull DataStore dataStore) {
+        this.dataStore = dataStore;
+    }
 
     /**
      * Sets the initial settings of the DisplayApplet.
@@ -60,6 +75,9 @@ public class DisplayApplet extends PApplet {
         textAlign(CENTER);
         drawText("RIBIT", 640, 950, 30);
         drawText("Robotic Interactive Broadcast & IoT Telecommunicator", 640, 980, 25);
+
+        // draw date
+        drawText("Start date: "+this.dataStore.getTime().toString(), 100, 1000, 10);
     }
 
     /**

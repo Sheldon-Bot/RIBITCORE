@@ -1,7 +1,7 @@
 package ribitcore;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
-import ribitcore.display.DisplayApplet;
+import ribitcore.data.DataStore;
 import ribitcore.display.DisplayController;
 import ribitcore.motor.MotorController;
 
@@ -9,6 +9,11 @@ import ribitcore.motor.MotorController;
  * The main class that controls RIBIT.
  */
 public class RibitApp {
+
+    /**
+     * The {@link DataStore} instance.
+     */
+    private final @NonNull DataStore dataStore;
 
     /**
      * The {@link MotorController} instance.
@@ -24,8 +29,9 @@ public class RibitApp {
      * Constructs {@link RibitApp}.
      */
     public RibitApp() {
-        this.motorController = new MotorController();
-        this.displayController = new DisplayController();
+        this.dataStore = new DataStore();
+        this.motorController = new MotorController(dataStore);
+        this.displayController = new DisplayController(dataStore);
     }
 
     /**

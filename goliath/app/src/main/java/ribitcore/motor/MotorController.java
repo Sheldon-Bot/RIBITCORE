@@ -2,6 +2,7 @@ package ribitcore.motor;
 
 import com.diozero.util.SleepUtil;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import ribitcore.data.DataStore;
 import ribitcore.thread.ThreadManager;
 
 /**
@@ -20,11 +21,19 @@ public class MotorController extends ThreadManager {
     private final @NonNull Motor rightMotor;
 
     /**
-     * Constructs {@link MotorController}.
+     * The {@link DataStore} instance.
      */
-    public MotorController() {
+    private final @NonNull DataStore dataStore;
+
+    /**
+     * Constructs {@link MotorController}.
+     *
+     * @param dataStore {@link DataStore} reference,
+     */
+    public MotorController(final @NonNull DataStore dataStore) {
         this.leftMotor = new Motor(23);
         this.rightMotor = new Motor(24);
+        this.dataStore = dataStore;
     }
 
     /**

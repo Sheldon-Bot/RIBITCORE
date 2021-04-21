@@ -38,7 +38,7 @@ public class RibitApp {
      * Starts the {@link RibitApp}.
      */
     public void start() {
-        this.motorController.run();
+//        this.motorController.run();
         this.displayController.run();
     }
 

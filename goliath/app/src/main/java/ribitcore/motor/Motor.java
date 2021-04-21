@@ -2,7 +2,6 @@ package ribitcore.motor;
 
 import com.diozero.api.Servo;
 import org.checkerframework.checker.nullness.qual.NonNull;
-import ribitcore.old.motor.MotorSpeed;
 
 /**
  * Represents a physical {@link Servo} motor.

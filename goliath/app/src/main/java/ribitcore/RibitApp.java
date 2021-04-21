@@ -1,16 +1,40 @@
 package ribitcore;
 
-import ribitcore.thread.ThreadManager;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import ribitcore.display.DisplayApplet;
+import ribitcore.display.DisplayController;
+import ribitcore.motor.MotorController;
 
 /**
  * The main class that controls RIBIT.
  */
 public class RibitApp {
 
-    public void start() {
+    /**
+     * The {@link MotorController} instance.
+     */
+    private final @NonNull MotorController motorController;
 
+    /**
+     * The {@link DisplayController} instance.
+     */
+    private final @NonNull DisplayController displayController;
+
+    /**
+     * Constructs {@link RibitApp}.
+     */
+    public RibitApp() {
+        this.motorController = new MotorController();
+        this.displayController = new DisplayController();
     }
 
-    private void runMotorController() {}
+    /**
+     * Starts the {@link RibitApp}.
+     */
+    public void start() {
+        this.motorController.runThread();
+        this.displayController.runThread();
+    }
+
 
 }

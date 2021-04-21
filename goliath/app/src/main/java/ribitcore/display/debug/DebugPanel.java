@@ -2,6 +2,7 @@ package ribitcore.display.debug;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import processing.core.PConstants;
+import processing.core.PFont;
 import ribitcore.data.DataStore;
 import ribitcore.display.DisplayApplet;
 
@@ -61,6 +62,11 @@ public class DebugPanel {
     private final @NonNull List<PanelEntry> panelEntryList;
 
     /**
+     * The font to use for panel rendering.
+     */
+    private final @NonNull PFont panelFont;
+
+    /**
      * Constructs {@link DebugPanel}.
      *
      * @param sketch    sketch instance.
@@ -68,11 +74,13 @@ public class DebugPanel {
      */
     public DebugPanel(
             final @NonNull DisplayApplet sketch,
+            final @NonNull PFont panelFont,
             final @NonNull DataStore dataStore
     ) {
         this.sketch = sketch;
         this.dataStore = dataStore;
         this.panelEntryList = new ArrayList<>();
+        this.panelFont = panelFont;
     }
 
     /**
@@ -89,6 +97,7 @@ public class DebugPanel {
         this.addPanelEntry(new PanelEntry("CurTime: "+ LocalDateTime.now().toString()));
 
         if (this.shouldShow) {
+            sketch.textFont(panelFont);
             sketch.fill(Color.BLACK.getRGB());
             sketch.rect(PANEL_X, PANEL_Y, PANEL_W, getHeight());
             sketch.fill(255, 255, 255);

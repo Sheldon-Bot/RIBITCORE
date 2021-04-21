@@ -1,9 +1,12 @@
 package ribitcore.display;
 
+import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import processing.core.PApplet;
+import processing.core.PFont;
 import ribitcore.data.DataStore;
 import ribitcore.display.debug.DebugPanel;
+import ribitcore.display.debug.PanelEntry;
 
 import java.awt.*;
 
@@ -28,9 +31,19 @@ public class DisplayApplet extends PApplet {
     private final @NonNull DataStore dataStore;
 
     /**
+     * The {@link PFont} to use for monospaced text.
+     */
+    private @MonotonicNonNull PFont fontMonospaced;
+
+    /**
+     * The {@link PFont} to use for main text.
+     */
+    private @MonotonicNonNull PFont fontMain;
+
+    /**
      * The {@link DebugPanel} instance.
      */
-    private final @NonNull DebugPanel debugPanel;
+    private @MonotonicNonNull DebugPanel debugPanel;
 
     /**
      * Constructs {@link DisplayApplet}.
@@ -38,8 +51,8 @@ public class DisplayApplet extends PApplet {
      * @param dataStore data store.
      */
     public DisplayApplet(final @NonNull DataStore dataStore) {
+        System.out.println(dataPath("Roboto-Light.ttf"));
         this.dataStore = dataStore;
-        this.debugPanel = new DebugPanel(this, dataStore);
     }
 
     /**
@@ -48,6 +61,15 @@ public class DisplayApplet extends PApplet {
     public void settings() {
         fullScreen(0);
         size(displayWidth, displayHeight);
+    }
+
+    /**
+     * Sets up important objects.
+     */
+    public void setup() {
+        this.fontMonospaced = createFont("/home/pi/bot/data/RobotoMono-Light.ttf", 18);
+        this.fontMain = createFont("/home/pi/bot/data/Roboto-Light.ttf", 18);
+        this.debugPanel = new DebugPanel(this, fontMonospaced, dataStore);
     }
 
     /**
@@ -60,7 +82,7 @@ public class DisplayApplet extends PApplet {
         // Display methods
         background(COLOR_BG.getRGB());
         drawBottomBar();
-        this.debugPanel.run();
+        drawDebugPanel();
     }
 
     /**
@@ -71,9 +93,20 @@ public class DisplayApplet extends PApplet {
      * @param y    y-coordinate of the text.
      */
     private void drawText(final @NonNull String text, final int x, final int y, final int textSize) {
+        textFont(fontMain);
         textSize(textSize);
         fill(COLOR_TEXT_MAIN.getRGB());
         text(text, x, y);
+    }
+
+    /**
+     * Draws the debug panel.
+     */
+    private void drawDebugPanel() {
+        this.debugPanel.addPanelEntry(new PanelEntry("keyCode: "+keyCode));
+        this.debugPanel.addPanelEntry(new PanelEntry("key: "+key));
+        this.debugPanel.addPanelEntry(new PanelEntry("sketch path: "+sketchPath()));
+        this.debugPanel.run();
     }
 
     /**

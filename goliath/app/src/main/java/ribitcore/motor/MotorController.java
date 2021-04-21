@@ -1,5 +1,6 @@
 package ribitcore.motor;
 
+import com.diozero.util.SleepUtil;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import ribitcore.thread.ThreadManager;
 
@@ -32,8 +33,20 @@ public class MotorController extends ThreadManager {
     @Override
     public void runThread() {
         while (true) {
-
+            setSpeedNice(TankSpeed.FORWARDS);
+            setSpeedNice(TankSpeed.BACKWARDS);
+            setSpeedNice(TankSpeed.LEFT);
+            setSpeedNice(TankSpeed.RIGHT);
         }
+    }
+
+    /**
+     * Sets the speed.
+     */
+    private void setSpeedNice(final @NonNull TankSpeed speed) {
+        System.out.println(speed);
+        this.setTankSpeed(speed);
+        SleepUtil.sleepSeconds(1);
     }
 
     /**
